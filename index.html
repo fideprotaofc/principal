@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nosso Cantinho 💖</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset básico */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #fff9fc);
+      color: #4a3b5d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Título principal */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.2rem;
+      color: #d474a1; /* rosa delicado */
+      margin: 0;
+      user-select: none;
+    }
+    /* Pequena animação batida para o emoji do título */
+    h1 span.emoji-heart {
+      display: inline-block;
+      transform-origin: center;
+      animation: pulseHeart 2.5s infinite ease-in-out;
+    }
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Container dos cards */
+    main {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+
+    /* Cards */
+    article.card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(212, 116, 161, 0.15);
+      padding: 1.8rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition:
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+      cursor: default;
+      user-select: none;
+      min-height: 180px;
+    }
+    article.card:hover,
+    article.card:focus-within {
+      box-shadow: 0 12px 30px rgba(212, 116, 161, 0.3);
+      transform: scale(1.04);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Título do card */
+    article.card h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      margin: 0 0 1rem 0;
+      color: #c85e90;
+      user-select: text;
+    }
+
+    /* Botão link */
+    a.button-link {
+      margin-top: auto;
+      align-self: flex-start;
+      background-color: #d474a1;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1.4rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 8px rgba(212, 116, 161, 0.25);
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1rem;
+    }
+    a.button-link:hover,
+    a.button-link:focus {
+      background-color: #c85e90;
+      box-shadow: 0 8px 14px rgba(200, 94, 144, 0.4);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    /* Texto "Em breve..." */
+    .coming-soon {
+      margin-top: auto;
+      font-style: italic;
+      font-weight: 500;
+      color: #aaa4b6;
+      font-size: 1.1rem;
+      user-select: text;
+      text-align: center;
+    }
+
+    /* Card especial 1 ano */
+    article.card.anniversary {
+      border: 2.5px solid #d9b96a;
+      background: #fff7db;
+      box-shadow: 0 6px 25px rgba(217, 185, 106, 0.3);
+      color: #8b6f28;
+      cursor: default;
+      user-select: text;
+      padding-top: 2.5rem;
+      position: relative;
+      font-weight: 600;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    /* Texto especial */
+    article.card.anniversary p {
+      margin: 0 0 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+    /* Emoji com leve batida no card 1 ano */
+    article.card.anniversary .emoji-love {
+      display: inline-block;
+      font-size: 1.7rem;
+      animation: beatEmoji 2s ease-in-out infinite;
+      user-select: none;
+    }
+    @keyframes beatEmoji {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Responsividade fina */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      article.card {
+        padding: 1.4rem 1.6rem 1.8rem;
+        min-height: 160px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nosso Cantinho <span class="emoji-heart" aria-label="coração" role="img">💖</span></h1>
+  </header>
+  <main>
+
+    <article class="card" tabindex="0" aria-labelledby="title1" role="region">
+      <h2 id="title1">Primeiro site</h2>
+      <a href="https://sites.google.com/view/paraminhaprincesa999/início" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o primeiro site">Visitar site</a>
+    </article>
+
+    <article class="card" tabindex="0" aria-labelledby="title2" role="region">
+      <h2 id="title2">Nosso site de 7 meses</h2>
+      <a href="https://fideprotaofc.github.io/fideprota2/" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o site de 7 meses">Visitar site</a>
+    </article>
+
+    <article class="card" tabindex="0" aria-labelledby="title3" role="region">
+      <h2 id="title3">Site de 8 meses</h2>
+      <a href="https://8meses.vercel.app/" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o site de 8 meses">Visitar site</a>
+    </article>
+
+    <article class="card" aria-labelledby="title4" role="region">
+      <h2 id="title4">Site de 9 meses</h2>
+      <p class="coming-soon" aria-live="polite" aria-atomic="true">Em breve…</p>
+    </article>
+
+    <article class="card" aria-labelledby="title5" role="region">
+      <h2 id="title5">Site de 10 meses</h2>
+      <p class="coming-soon" aria-live="polite" aria-atomic="true">Em breve…</p>
+    </article>
+
+    <article class="card" aria-labelledby="title6" role="region">
+      <h2 id="title6">Site de 11 meses</h2>
+      <p class="coming-soon" aria-live="polite" aria-atomic="true">Em breve…</p>
+    </article>
+
+    <article class="card anniversary" aria-labelledby="title7" role="region">
+      <h2 id="title7">1 ano</h2>
+      <p>NÃO VAI SER SITE, HIHIHI <span class="emoji-love" aria-label="coração pulsante" role="img">💕</span></p>
+    </article>
+
+  </main>
+</body>
+</html>
