@@ -3,217 +3,532 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nosso Cantinho 💖</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Nosso Cantinho 🎀</title>
+  
+  <!-- Google Fonts: Lobster para títulos e Nunito para corpo -->
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome para Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
-    /* Reset básico */
+    /* Variáveis de Design para o Tema Hello Kitty */
+    :root {
+      --bg-black: #121212;
+      --hk-pink: #FF69B4;
+      --hk-bow-red: #E60012;
+      --text-white: #F5F5F5;
+      --card-white: #FFFFFF;
+      --font-heading: 'Lobster', cursive;
+      --font-body: 'Nunito', sans-serif;
+    }
+
+    /* Reset e Configurações Globais */
     *, *::before, *::after {
       box-sizing: border-box;
     }
     body {
-      margin: 0; padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #ffe6f0, #fff9fc);
-      color: #4a3b5d;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-body);
+      color: var(--text-white);
+      background-color: var(--bg-black);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 4rem;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF69B4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>'), auto;
     }
-    /* Título principal */
+
+    /* --- Laço Decorativo com CSS Puro --- */
+    .bow {
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        top: 10px;
+        right: 10px;
+        opacity: 0.8;
+    }
+    .bow::before, .bow::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 30px;
+        background: var(--hk-pink);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+    .bow::before { left: 0; transform: rotate(-45deg); }
+    .bow::after { right: 0; transform: rotate(45deg); }
+    .bow .center {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: var(--hk-bow-red);
+        border-radius: 50%;
+        top: 10px;
+        left: 15px;
+    }
+
+
+    /* --- Tela de Carregamento (Preloader) --- */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+    .preloader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .preloader i {
+      font-size: 4rem;
+      color: var(--hk-pink);
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* --- Cabeçalho e Logo --- */
     header {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+      z-index: 10;
     }
     h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3.2rem;
-      color: #d474a1; /* rosa delicado */
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       margin: 0;
-      user-select: none;
+      color: var(--hk-pink);
+      text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.5);
+      animation: bounce 2s infinite;
     }
-    /* Pequena animação batida para o emoji do título */
-    h1 span.emoji-heart {
-      display: inline-block;
-      transform-origin: center;
-      animation: pulseHeart 2.5s infinite ease-in-out;
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-15px); }
+      60% { transform: translateY(-5px); }
+    }
+    h1 i {
+      margin-left: 10px;
+      animation: pulseHeart 1.5s infinite ease-in-out;
     }
     @keyframes pulseHeart {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    /* Container dos cards */
-    main {
-      width: 100%;
-      max-width: 900px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 2rem;
-    }
-
-    /* Cards */
-    article.card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(212, 116, 161, 0.15);
-      padding: 1.8rem 2rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition:
-        box-shadow 0.35s ease,
-        transform 0.35s ease;
-      cursor: default;
-      user-select: none;
-      min-height: 180px;
-    }
-    article.card:hover,
-    article.card:focus-within {
-      box-shadow: 0 12px 30px rgba(212, 116, 161, 0.3);
-      transform: scale(1.04);
-      outline: none;
-      cursor: pointer;
-    }
-
-    /* Título do card */
-    article.card h2 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.8rem;
-      margin: 0 0 1rem 0;
-      color: #c85e90;
-      user-select: text;
-    }
-
-    /* Botão link */
-    a.button-link {
-      margin-top: auto;
-      align-self: flex-start;
-      background-color: #d474a1;
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 1.4rem;
-      border-radius: 9999px;
-      box-shadow: 0 4px 8px rgba(212, 116, 161, 0.25);
-      transition:
-        background-color 0.3s ease,
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 1rem;
-    }
-    a.button-link:hover,
-    a.button-link:focus {
-      background-color: #c85e90;
-      box-shadow: 0 8px 14px rgba(200, 94, 144, 0.4);
-      transform: translateY(-3px);
-      outline: none;
-    }
-
-    /* Texto "Em breve..." */
-    .coming-soon {
-      margin-top: auto;
-      font-style: italic;
-      font-weight: 500;
-      color: #aaa4b6;
-      font-size: 1.1rem;
-      user-select: text;
-      text-align: center;
-    }
-
-    /* Card especial 1 ano */
-    article.card.anniversary {
-      border: 2.5px solid #d9b96a;
-      background: #fff7db;
-      box-shadow: 0 6px 25px rgba(217, 185, 106, 0.3);
-      color: #8b6f28;
-      cursor: default;
-      user-select: text;
-      padding-top: 2.5rem;
-      position: relative;
-      font-weight: 600;
-      font-size: 1.4rem;
-      text-align: center;
-    }
-    /* Texto especial */
-    article.card.anniversary p {
-      margin: 0 0 1rem;
-      font-family: 'Inter', sans-serif;
-    }
-    /* Emoji com leve batida no card 1 ano */
-    article.card.anniversary .emoji-love {
-      display: inline-block;
-      font-size: 1.7rem;
-      animation: beatEmoji 2s ease-in-out infinite;
-      user-select: none;
-    }
-    @keyframes beatEmoji {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
 
-    /* Responsividade fina */
-    @media (max-width: 400px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      article.card {
-        padding: 1.4rem 1.6rem 1.8rem;
-        min-height: 160px;
+    /* --- Conteúdo Principal com Grid --- */
+    main {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* --- Cards com Estilo "Sticker" --- */
+    article.card {
+      background: var(--card-white);
+      color: var(--bg-black);
+      border-radius: 15px;
+      border: 3px solid var(--hk-pink);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      opacity: 0;
+      transform: translateY(50px) scale(0.8);
+      cursor: default;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    article.card .bow { /* Adiciona o laço a cada card */
+        transform: scale(0.7);
+        top: 5px;
+        right: 5px;
+    }
+    article.card.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    article.card:hover {
+      transform: translateY(-10px) rotate(-2deg);
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+    }
+
+    article.card h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--bg-black);
+      margin: 0 0 1.5rem 0;
+    }
+
+    /* --- Botões com Efeito "Gummy" --- */
+    a.button-link {
+      margin-top: auto;
+      background-color: var(--hk-pink);
+      color: var(--text-white);
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 0 #d63384, 0 8px 10px rgba(0,0,0,0.2);
+      transition: all 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    a.button-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+    }
+    a.button-link:hover::before {
+        left: 100%;
+    }
+    a.button-link:hover, a.button-link:focus {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #d63384, 0 4px 5px rgba(0,0,0,0.2);
+      outline: none;
+    }
+    a.button-link:active {
+      transform: translateY(5px);
+      box-shadow: 0 0 0 #d63384, 0 2px 3px rgba(0,0,0,0.2);
+    }
+
+    /* --- Card "Em Breve" com Laço Piscante --- */
+    .coming-soon-wrapper {
+      margin-top: auto;
+      background: var(--bg-black);
+      border: 2px dashed var(--hk-pink);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .coming-soon-wrapper i {
+      font-size: 2.5rem;
+      color: var(--hk-pink);
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .coming-soon {
+      font-weight: 600;
+      color: var(--hk-pink);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    /* --- Card Especial de 1 Ano com Hello Kitty --- */
+    article.card.anniversary {
+      background: var(--bg-black);
+      border: 4px solid var(--hk-pink);
+      color: var(--hk-pink);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5), inset 0 0 20px rgba(255, 105, 180, 0.2);
+      grid-column: 1 / -1; /* Ocupa a largura total */
+      padding: 3rem;
+    }
+    .hk-face {
+        width: 120px;
+        height: 100px;
+        background: var(--card-white);
+        border-radius: 50%;
+        position: relative;
+        margin: 1rem auto;
+    }
+    .hk-face::before, .hk-face::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 15px;
+        background: var(--bg-black);
+        border-radius: 50%;
+        top: 30px;
+    }
+    .hk-face::before { left: 30px; }
+    .hk-face::after { right: 30px; }
+    .hk-nose {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--hk-bow-red);
+        border-radius: 50%;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .hk-bow-wrapper {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: pulse-bow 2s infinite;
+    }
+    .hk-bow-wrapper .bow {
+        width: 60px;
+        height: 40px;
+        position: relative;
+    }
+    .hk-bow-wrapper .bow::before, .hk-bow-wrapper .bow::after {
+        width: 30px;
+        height: 40px;
+        background: var(--hk-bow-red);
+    }
+    .hk-bow-wrapper .bow .center {
+        width: 15px;
+        height: 15px;
+        background: var(--hk-pink);
+        top: 12.5px;
+        left: 22.5px;
+    }
+    @keyframes pulse-bow {
+        0%, 100% { transform: translateX(-50%) scale(1); filter: brightness(1); }
+        50% { transform: translateX(-50%) scale(1.1); filter: brightness(1.3); }
+    }
+    article.card.anniversary h2 {
+      font-size: 3rem;
+      color: var(--hk-pink);
+      text-shadow: 0 0 10px var(--hk-pink);
+    }
+    article.card.anniversary p {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: auto;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-white);
+      width: 100%;
+      border-top: 1px solid var(--hk-pink);
+    }
+    footer i {
+      color: var(--hk-pink);
+    }
+
+    /* --- Coração Flutuante no Click (agora um laço) --- */
+    .heart {
+      position: fixed;
+      pointer-events: none;
+      animation: fly 1.2s ease-out forwards;
+      z-index: 1000;
+      font-size: 1.5rem;
+      color: var(--hk-pink);
+    }
+    @keyframes fly {
+      to {
+        transform: translateY(-150px) scale(0) rotate(20deg);
+        opacity: 0;
       }
     }
 
+    /* --- Rastro de Pó de Fada Rosa no Mouse --- */
+    .fairy-dust {
+      position: fixed;
+      pointer-events: none;
+      width: 8px;
+      height: 8px;
+      background: var(--hk-pink);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--hk-pink);
+      animation: dust-fall 1s ease-out forwards;
+      z-index: 999;
+    }
+    @keyframes dust-fall {
+      to {
+        transform: translateY(20px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* --- Responsividade --- */
+    @media (max-width: 768px) {
+      main { grid-template-columns: 1fr; padding: 0 1rem 3rem; }
+      h1 { font-size: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      header { padding: 2rem 1rem 1rem; }
+      article.card { padding: 1.5rem; }
+      article.card h2 { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <i class="fas fa-bow"></i>
+  </div>
+
   <header>
-    <h1>Nosso Cantinho <span class="emoji-heart" aria-label="coração" role="img">💖</span></h1>
+    <h1>Nosso Cantinho <i class="fas fa-heart"></i></h1>
   </header>
+
   <main>
-
-    <article class="card" tabindex="0" aria-labelledby="title1" role="region">
-      <h2 id="title1">Primeiro site</h2>
-      <a href="https://sites.google.com/view/paraminhaprincesa999/início" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o primeiro site">Visitar site</a>
+    <article class="card" role="region" aria-label="Primeiro site">
+      <div class="bow"><div class="center"></div></div>
+      <h2>Primeiro site</h2>
+      <a href="https://sites.google.com/view/paraminhaprincesa999/início" target="_blank" rel="noopener" class="button-link">
+        Visitar <i class="fas fa-arrow-right"></i>
+      </a>
     </article>
 
-    <article class="card" tabindex="0" aria-labelledby="title2" role="region">
-      <h2 id="title2">Nosso site de 7 meses</h2>
-      <a href="https://7meses.vercel.app/" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o site de 7 meses">Visitar site</a>
+    <article class="card" role="region" aria-label="Site de 7 meses">
+      <div class="bow"><div class="center"></div></div>
+      <h2>7 meses</h2>
+      <a href="https://7meses.vercel.app/" target="_blank" rel="noopener" class="button-link">
+        Visitar <i class="fas fa-arrow-right"></i>
+      </a>
     </article>
 
-    <article class="card" tabindex="0" aria-labelledby="title3" role="region">
-      <h2 id="title3">Site de 8 meses</h2>
-      <a href="https://8meses.vercel.app/" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o site de 8 meses">Visitar site</a>
+    <article class="card" role="region" aria-label="Site de 8 meses">
+      <div class="bow"><div class="center"></div></div>
+      <h2>8 meses</h2>
+      <a href="https://8meses.vercel.app/" target="_blank" rel="noopener" class="button-link">
+        Visitar <i class="fas fa-arrow-right"></i>
+      </a>
     </article>
 
-    <article class="card" tabindex="0" aria-labelledby="title4" role="region">
-      <h2 id="title3">Site de 9 meses</h2>
-      <a href="https://9meses-theta.vercel.app/" target="_blank" rel="noopener" class="button-link" aria-label="Abrir o site de 9 meses">Visitar site</a>
+    <article class="card" role="region" aria-label="Site de 9 meses">
+      <div class="bow"><div class="center"></div></div>
+      <h2>9 meses</h2>
+      <a href="https://9meses-theta.vercel.app/" target="_blank" rel="noopener" class="button-link">
+        Visitar <i class="fas fa-arrow-right"></i>
+      </a>
     </article>
 
-    <article class="card" aria-labelledby="title5" role="region">
-      <h2 id="title5">Site de 10 meses</h2>
-      <p class="coming-soon" aria-live="polite" aria-atomic="true">Em breve…</p>
+    <article class="card" role="region" aria-label="Site de 10 meses">
+      <div class="bow"><div class="center"></div></div>
+      <h2>10 meses</h2>
+      <div class="coming-soon-wrapper">
+        <i class="fas fa-gift"></i>
+        <p class="coming-soon">Em breve…</p>
+      </div>
     </article>
 
-    <article class="card" aria-labelledby="title6" role="region">
-      <h2 id="title6">Site de 11 meses</h2>
-      <p class="coming-soon" aria-live="polite" aria-atomic="true">Em breve…</p>
+    <article class="card" role="region" aria-label="Site de 11 meses">
+      <div class="bow"><div class="center"></div></div>
+      <h2>11 meses</h2>
+      <div class="coming-soon-wrapper">
+        <i class="fas fa-gift"></i>
+        <p class="coming-soon">Em breve…</p>
+      </div>
     </article>
 
-    <article class="card anniversary" aria-labelledby="title7" role="region">
-      <h2 id="title7">1 ano</h2>
-      <p>NÃO VAI SER SITE, HIHIHI <span class="emoji-love" aria-label="coração pulsante" role="img">💕</span></p>
+    <article class="card anniversary" role="region" aria-label="Comemoração de 1 ano">
+      <div class="card-content">
+        <h2>1 ano</h2>
+        <div class="hk-face">
+            <div class="hk-nose"></div>
+            <div class="hk-bow-wrapper">
+                <div class="bow"><div class="center"></div></div>
+            </div>
+        </div>
+        <p>NÃO VAI SER SITE, HIHIHI <i class="fas fa-heart"></i></p>
+      </div>
     </article>
-
   </main>
+
+  <footer>
+    Feito com todo o amor do mundo <i class="fas fa-heart"></i>
+  </footer>
+
+  <script>
+    // --- Funcionalidade do Preloader ---
+    window.addEventListener('load', () => {
+      const preloader = document.querySelector('.preloader');
+      setTimeout(() => {
+        preloader.classList.add('hide');
+      }, 1000);
+    });
+
+    // --- Animação dos Cards ao Rolar ---
+    const cards = document.querySelectorAll('.card');
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => observer.observe(card));
+
+    // --- Efeito de Laço Flutuante no Clique dos Botões ---
+    const buttons = document.querySelectorAll('.button-link');
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const bow = document.createElement('i');
+        bow.classList.add('heart', 'fas', 'fa-bow');
+        bow.style.left = `${e.clientX}px`;
+        bow.style.top = `${e.clientY}px`;
+        document.body.appendChild(bow);
+
+        setTimeout(() => bow.remove(), 1200);
+
+        setTimeout(() => {
+          window.open(button.href, button.target);
+        }, 300);
+      });
+    });
+
+    // --- Rastro de Pó de Fada Rosa no Mouse ---
+    let mouseTimer;
+    document.addEventListener('mousemove', (e) => {
+      clearTimeout(mouseTimer);
+      mouseTimer = setTimeout(() => {
+        const dust = document.createElement('div');
+        dust.classList.add('fairy-dust');
+        dust.style.left = `${e.clientX}px`;
+        dust.style.top = `${e.clientY}px`;
+        document.body.appendChild(dust);
+        setTimeout(() => dust.remove(), 1000);
+      }, 50);
+    });
+
+  </script>
 </body>
 </html>
